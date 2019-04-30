@@ -1,4 +1,16 @@
+Galdust
+========
+
 This is a small tool to calculate some properties of the infrared magnitude comming
 from the starlight causes by the dust extintion heated by such starlight.
 
-Status: This are not suitable for scientific usage, at least not yet.
+Status: This are NOT suitable for scientific usage, at least not yet.
+
+Instalation
+------------
+* 1. Download the code
+* 2. execute `cd galdust & pip install -e .`
+
+Usage
+------
+See the example-usage.py script
