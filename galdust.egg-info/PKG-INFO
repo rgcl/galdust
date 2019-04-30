@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: galdust
+Version: 0.1
+Summary: Models for the dust emission of galaxies using the data by the astronomer Bruce Draine
+Home-page: UNKNOWN
+Author: Rodrigo González-Castillo
+Author-email: rodrigo.gonzalez@uamail.cl
+License: MIT
+Description: UNKNOWN
+Keywords: astrophysics,galaxy,dust emission
+Platform: UNKNOWN

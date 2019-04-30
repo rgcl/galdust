@@ -1,0 +1,8 @@
+setup.py
+galdust/__init__.py
+galdust.egg-info/PKG-INFO
+galdust.egg-info/SOURCES.txt
+galdust.egg-info/dependency_links.txt
+galdust.egg-info/entry_points.txt
+galdust.egg-info/requires.txt
+galdust.egg-info/top_level.txt

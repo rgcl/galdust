@@ -1,0 +1,3 @@
+[console_scripts]
+galdust = galdust:main
+
