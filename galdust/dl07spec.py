@@ -178,8 +178,10 @@ class DustModel:
         # lambdas in um to nm
         self._wavelength = (data[:, 0] * u.micron).to(u.nm)
 
+        h_mass_kg = 1.67e-27  # taken from literature
+
         # \nu*dP/d\nu in (erg s-1 H-1) to (W/kg of H)
-        nu_dp_dnu_aux = (data[:, 1] * u.Unit('erg/(s*g)')).to('W/kg')
+        nu_dp_dnu_aux = (data[:, 1] * 1/h_mass_kg * u.Unit('erg/(s*kg)')).to('W/kg')
 
         # using \nu*L_\nu = \lambda*L_\lambda, then L_\lambda = nu_dP_dnu_aux / \lambda
         self._luminosity = nu_dp_dnu_aux/self._wavelength
