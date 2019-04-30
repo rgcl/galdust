@@ -13,7 +13,7 @@ setup(
     packages=['galdust'],
 
     install_requires=[
-        'numpy', 'click', 'scipy', 'matplotlib', 'astropy'
+        'numpy', 'matplotlib', 'astropy'
     ],
     package_data={'galdust': ['galdust/data/*']},
     author='Rodrigo González-Castillo',
