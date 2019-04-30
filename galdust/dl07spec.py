@@ -184,7 +184,10 @@ class DustModel:
         nu_dp_dnu_aux = (data[:, 1] * 1/h_mass_kg * u.Unit('erg/(s*kg)')).to('W/kg')
 
         # using \nu*L_\nu = \lambda*L_\lambda, then L_\lambda = nu_dP_dnu_aux / \lambda
-        self._luminosity = nu_dp_dnu_aux/self._wavelength
+        luminosity = nu_dp_dnu_aux/self._wavelength
+
+        # using the formula j_\nu = (1-gamma)*j_\nu[umin,umax]+gamma*j_\nu[umin,umax]
+        self._luminosity = (1 - self._gamma) * luminosity + self._gamma * luminosity
 
         self._j_nu = data[:, 2]  # j_\nu in (Jy cm2 sr-1 H-1)
 
