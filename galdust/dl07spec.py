@@ -209,10 +209,11 @@ class DustModel:
         :return:
         """
         spectrum = self.spectrum()
-        plt.plot(spectrum[:, 0], spectrum[:, 1])
+        plt.loglog(spectrum[:, 0], spectrum[:, 1])
         plt.title('Model Spectrum')
         plt.xlabel('$\lambda[nm]$')
         plt.ylabel('$L_\lambda$ [W/nm/(kg of H)]')
+        plt.minorticks_on()
         if filename:
             plt.savefig(filename)
         else:
