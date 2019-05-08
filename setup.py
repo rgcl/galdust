@@ -9,11 +9,11 @@ from setuptools import setup
 
 setup(
     name='galdust',
-    version='0.1',
+    version='0.2',
     packages=['galdust'],
 
     install_requires=[
-        'numpy', 'matplotlib', 'astropy'
+        'numpy', 'matplotlib', 'astropy', 'scipy'
     ],
     package_data={'galdust': ['galdust/data/*']},
     author='Rodrigo González-Castillo',

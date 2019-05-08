@@ -7,6 +7,8 @@ from collections import namedtuple
 from astropy import units as u
 import matplotlib
 import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
+from scipy import integrate
 
 PATTERN = re.compile('^U(?P<umin>[^_]+)_(?P<umax>[^_]+)_(?P<model>.+)\\.txt$')
 
@@ -54,6 +56,7 @@ class DL07specContainer:
     def _lazy_loader(self):
         if self.loaded:
             return
+        print("(Loading files from DL07spec...)")
         dl2007spec_dir = path.join(path.dirname(__file__), 'data', 'DL07spec', '**/*.txt')
         self.models_data = dict()
         for absolute_path in glob(dl2007spec_dir):
@@ -202,6 +205,21 @@ class DustModel:
         spectrum = self.spectrum()
         return np.trapz(spectrum[:, 1], spectrum[:, 0])
 
+    def luminosity_per_wavelength(self, filter_data):
+        """
+
+        :param filter_data: <wavelength in nm, energy>
+        :return: luminosity in the filter
+        """
+        spectrum = self.spectrum()
+        base_lambda = np.concatenate((spectrum[:, 0], filter_data[:, 0]))
+        base_lambda = np.unique(base_lambda).astype(np.float32)  # this also sort
+
+        T = interp1d(filter_data[:, 0], filter_data[:, 1], fill_value='extrapolate')(base_lambda)
+        L = interp1d(spectrum[:, 0], spectrum[:, 1], fill_value='extrapolate')(base_lambda)
+
+        return np.trapz(T * L, base_lambda) / np.trapz(T, base_lambda)
+
     def plot_spectrum(self, filename=None):
         """
         Plot the spectrum
@@ -254,4 +272,4 @@ class DustModel:
         self._gamma = gamma
 
     def __str__(self):
-        return f'<dl07spec.DustModel model={self._model}, umin={self._umin}, umax={self._umax}>'
+        return f'<dl07spec.DustModel model={self._model}, umin={self._umin}, umax={self._umax}, gamma={self._gamma}>'
